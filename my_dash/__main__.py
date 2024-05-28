@@ -1,5 +1,5 @@
 def main() -> None:
-    import dash.callbacks  # noqa: F401
+    from my_dash.callbacks import Input, Output, State, dash_table  # noqa: F401
 
     from .app import app
     from .layout import render_layout
