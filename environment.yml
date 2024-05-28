@@ -1,0 +1,21 @@
+# Usage:
+#   conda env create -f environment.yml
+name: dash
+channels: [conda-forge]
+dependencies:
+  - python
+  - pip
+  - numpy
+  - pandas
+  - plotly
+  - dash
+  - rich
+  - jupyter
+  - ipywidgets
+  - ruff
+  - black
+  - mypy
+  - xlrd
+  - icecream
+  - loguru
+  - pandera
