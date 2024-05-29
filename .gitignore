@@ -5,4 +5,6 @@ __pycache__/
 *.xls
 *.xlsx
 *.drawio
-store_cache/*
+store_cache/*.txt
+store_cache/*.json
+store_cache/*.csv
