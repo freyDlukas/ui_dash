@@ -309,6 +309,9 @@ def store_files(
 ):
     path = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/"
     if n_clicks > 0:
+       #TODO: Check if Folder exists if not create it
+        if not os.path.exists(path):
+            os.makedirs(path)
         # Save Group A, Group B, and Description to files
         with open(path + "group_a.txt", "w") as file:
             file.write(group_a)
