@@ -5,4 +5,4 @@ __pycache__/
 *.xls
 *.xlsx
 *.drawio
-store_cache/
+store_cache/*
