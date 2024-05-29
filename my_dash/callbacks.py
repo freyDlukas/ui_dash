@@ -332,6 +332,7 @@ def store_files(
         return "Files saved successfully."
     return ""
 
+#TODO: throw error when no files are uploaded and start button is clicked
 
 # start script not tested yet, button "cooldown einfügen"
 # @app.callback(
