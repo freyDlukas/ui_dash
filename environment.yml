@@ -1,5 +1,7 @@
 # Usage:
 #   conda env create -f environment.yml
+# TODO: Get Snakemake into the file somehow, otherwise install it seperately
+# conda install bioconda::snakemake
 name: dash
 channels: [conda-forge]
 dependencies:

@@ -28,6 +28,7 @@ def remove_old_folders(directory, days=30):
 directory_to_clean = "/path/to/your/directory"
 remove_old_folders(directory_to_clean)
 
+#TODO: create folder with timestamp move data from cache to folder
 
 # start snakemake
 os.system("snakemake --cores 4 -s folder/snakefilename")
