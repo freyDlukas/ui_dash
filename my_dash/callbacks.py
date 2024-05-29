@@ -307,7 +307,7 @@ def construct_filter(derived_query_structure, df, complexOperator=None):
 def store_files(
     n_clicks, group_a, group_b, description, analysis, gene, meta, table_a, table_b
 ):
-    path = "/Users/lukas-danielf/Documents/Pathologie Marburg/dashtest/dash_ui/store_cache/"
+    path = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/"
     if n_clicks > 0:
         # Save Group A, Group B, and Description to files
         with open(path + "group_a.txt", "w") as file:
