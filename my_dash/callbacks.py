@@ -102,9 +102,9 @@ def exclude_genes(data):
     # Load data from store
     loaded_gene_data = pd.read_json(data, orient="records")
     # create list for input options
-    df = pd.DataFrame(loaded_gene_data)
-    options = df["Gene symbol"].tolist()
+    options = loaded_gene_data["Gene symbol"].tolist()
     return options
+#TODO: options list not working yet
 
 # store excluded genes
 @app.callback(
