@@ -104,8 +104,8 @@ def exclude_genes(data):
     # create list for input options
     options = loaded_gene_data["Gene symbol"].tolist()
     return options
-#TODO: options list not working yet
-
+#FIXME: options list not working yet
+#FIXME: not working on linux yet
 # store excluded genes
 @app.callback(
     Output("store-excluded-genes", "data"),
