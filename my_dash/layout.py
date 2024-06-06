@@ -148,6 +148,17 @@ def render_layout() -> Component:
                     id="input-analysis", type="text", placeholder="Name Analysis"
                 ),
                 html.Br(),
+                html.P("Include Control Genes in Analysis?"),
+                dcc.RadioItems([
+                    {'label': 'Yes', 'value': 'True'},
+                    {'label': 'No', 'value': 'False'}, 
+                ],
+                value = 'True',
+                inline= True,
+                id = "controlgenes"
+                ),
+                dcc.Store(id="store-controlgenes"),
+                html.Br(),
                 dcc.Store(id="store-analysis"),
                 html.Br(),
                 dcc.Textarea(

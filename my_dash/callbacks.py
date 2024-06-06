@@ -52,6 +52,11 @@ def store_description(value):
         return "No Description"
     else:
         return value
+    
+# store control genes yes/no
+@app.callback(Output("store-controlgenes", "data"), Input("controlgenes", "value"))
+def store_controlgenes(value):
+    return value
 
 
 # Callback to read uploaded gene file and store it
@@ -326,10 +331,11 @@ def construct_filter(derived_query_structure, df, complexOperator=None):
         State("store-a-table", "data"),
         State("store-b-table", "data"),
         State("store-excluded-genes", "data"),
+        State("store-controlgenes", "data"),
     ],
 )
 def store_files(
-    n_clicks, group_a, group_b, description, analysis, gene, meta, table_a, table_b, excluded_genes
+    n_clicks, group_a, group_b, description, analysis, gene, meta, table_a, table_b, excluded_genes, control_genes
 ):
     path = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/"
     if n_clicks > 0:
@@ -347,6 +353,8 @@ def store_files(
             file.write(analysis)
         with open(path + "excluded_genes.txt", "w") as file:
             file.write(str(excluded_genes))
+        with open(path + "control_genes.txt", "w") as file:
+            file.write(control_genes)
         gene = pd.read_json(gene, orient="records")
         meta = pd.read_json(meta, orient="records")
         table_a = pd.read_json(table_a, orient="records")
