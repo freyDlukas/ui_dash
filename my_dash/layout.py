@@ -62,6 +62,17 @@ def render_layout() -> Component:
                                 html.Div(
                                     id="container-gene"
                                 ),  # show genedata (snippet)
+                                dcc.Input(
+                                    id="excluded-genes",
+                                    type="text",
+                                    placeholder=" Genes to exclude",
+                                    multiple = True,
+                                    list = "store-gene-options",
+                                    autoComplete = "on",
+
+                                ),
+                                dcc.Store(id="store-gene-options"),
+                                dcc.Store(id="store-excluded-genes"),
                                 html.Hr(),
                             ]
                         ),
@@ -89,6 +100,8 @@ def render_layout() -> Component:
                 html.Br(),
                 dcc.Store(id="store-a"),
                 html.Br(),
+                html.P("Use the \"|\" symbol to filter for multiple values"),
+                html.Br(),
                 DataTable(
                     id="table-a",
                     columns=[],
@@ -110,6 +123,8 @@ def render_layout() -> Component:
                 dcc.Input(placeholder="Name Group B", id="input-name-b", type="text"),
                 html.Br(),
                 dcc.Store(id="store-b"),
+                html.Br(),
+                html.P("Use the \"|\" symbol to filter for multiple values"),
                 html.Br(),
                 DataTable(
                     id="table-b",

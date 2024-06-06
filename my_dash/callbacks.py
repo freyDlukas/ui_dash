@@ -92,6 +92,29 @@ def display_genedata(data):
         style_table={"overflowX": "auto"},
     )
 
+# gene option list
+@app.callback(
+    Output("store-gene-options", "data"), Input("store-gene", "data")
+)
+def exclude_genes(data):
+    if data is None:
+        return
+    # Load data from store
+    loaded_gene_data = pd.read_json(data, orient="records")
+    # create list for input options
+    df = pd.DataFrame(loaded_gene_data)
+    options = df["Gene symbol"].tolist()
+    return options
+
+# store excluded genes
+@app.callback(
+    Output("store-excluded-genes", "data"),
+    Input("excluded-genes", "value"),
+)
+def store_excluded_genes(value):
+    if value is None:
+        return []
+    return value
 
 # Callback to read uploaded meta file and store it
 @app.callback(
@@ -302,10 +325,11 @@ def construct_filter(derived_query_structure, df, complexOperator=None):
         State("store-meta", "data"),
         State("store-a-table", "data"),
         State("store-b-table", "data"),
+        State("store-excluded-genes", "data"),
     ],
 )
 def store_files(
-    n_clicks, group_a, group_b, description, analysis, gene, meta, table_a, table_b
+    n_clicks, group_a, group_b, description, analysis, gene, meta, table_a, table_b, excluded_genes
 ):
     path = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/"
     if n_clicks > 0:
@@ -321,6 +345,8 @@ def store_files(
             file.write(description)
         with open(path + "analysis.txt", "w") as file:
             file.write(analysis)
+        with open(path + "excluded_genes.txt", "w") as file:
+            file.write(str(excluded_genes))
         gene = pd.read_json(gene, orient="records")
         meta = pd.read_json(meta, orient="records")
         table_a = pd.read_json(table_a, orient="records")
@@ -344,3 +370,4 @@ def store_files(
 #         os.system("snakemake --cores 4 -s folder/snakefilename")
 #         return "Analysis started."
 #     return ""
+
