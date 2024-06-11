@@ -8,6 +8,8 @@ from dash import Input, Output, State, dash_table
 
 from .app import app
 
+#FIXME: not working on linux yet (create folder)
+
 # Define data types and excluded columns
 types = {
     "id": "numeric",
@@ -111,20 +113,6 @@ def populate_gene_options(data):
     options = [{"label": gene, "value": gene} for gene in loaded_gene_data["Gene symbol"].tolist()]
     return options
 
-# # gene option list
-# @app.callback(
-#     Output("store-gene-options", "data"), Input("store-gene", "data")
-# )
-# def exclude_genes(data):
-#     if data is None:
-#         return []
-#     # Load data from store
-#     loaded_gene_data = pd.read_json(data, orient="records")
-#     # create list for input options
-#     options = loaded_gene_data["Gene symbol"].tolist()
-#     return options
-#FIXME: options list not working yet
-#FIXME: not working on linux yet
 
 #store excluded genes
 @app.callback(
