@@ -5,6 +5,7 @@ import os
 import pandas as pd
 from dash import Input, Output, State, dash_table
 
+
 from .app import app
 
 # Define data types and excluded columns
@@ -103,7 +104,7 @@ def display_genedata(data):
 )
 def exclude_genes(data):
     if data is None:
-        return
+        return []
     # Load data from store
     loaded_gene_data = pd.read_json(data, orient="records")
     # create list for input options
@@ -111,7 +112,8 @@ def exclude_genes(data):
     return options
 #FIXME: options list not working yet
 #FIXME: not working on linux yet
-# store excluded genes
+
+#store excluded genes
 @app.callback(
     Output("store-excluded-genes", "data"),
     Input("excluded-genes", "value"),
@@ -120,6 +122,17 @@ def store_excluded_genes(value):
     if value is None:
         return []
     return value
+
+# show excluded genes
+@app.callback(
+    Output("container-excluded-genes", "children"),
+    Input("excluded-genes", "value"),
+)
+def display_excluded_genes(value):
+    if value is None:
+        return "No Genes Excluded (seperate multiple genes with \",\")"
+    else:
+        return f'Following Genes are excluded from the Analysis {value}'
 
 # Callback to read uploaded meta file and store it
 @app.callback(

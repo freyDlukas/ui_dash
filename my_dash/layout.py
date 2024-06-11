@@ -62,6 +62,7 @@ def render_layout() -> Component:
                                 html.Div(
                                     id="container-gene"
                                 ),  # show genedata (snippet)
+                                html.Br(),
                                 dcc.Input(
                                     id="excluded-genes",
                                     type="text",
@@ -71,6 +72,10 @@ def render_layout() -> Component:
                                     autoComplete = "on",
 
                                 ),
+                                html.Br(),
+                                html.Br(),
+                                html.Div(id="container-excluded-genes"),
+                                html.Br(),
                                 dcc.Store(id="store-gene-options"),
                                 dcc.Store(id="store-excluded-genes"),
                                 html.Hr(),
