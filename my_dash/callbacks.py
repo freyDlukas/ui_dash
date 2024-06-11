@@ -97,19 +97,32 @@ def display_genedata(data):
         page_size=10,
         style_table={"overflowX": "auto"},
     )
-
-# gene option list
+# Populate gene options in dropdown
 @app.callback(
-    Output("store-gene-options", "data"), Input("store-gene", "data")
+    Output("excluded-genes", "options"), 
+    Input("store-gene", "data")
 )
-def exclude_genes(data):
+def populate_gene_options(data):
     if data is None:
         return []
     # Load data from store
     loaded_gene_data = pd.read_json(data, orient="records")
-    # create list for input options
-    options = loaded_gene_data["Gene symbol"].tolist()
+    # Create list for dropdown options
+    options = [{"label": gene, "value": gene} for gene in loaded_gene_data["Gene symbol"].tolist()]
     return options
+
+# # gene option list
+# @app.callback(
+#     Output("store-gene-options", "data"), Input("store-gene", "data")
+# )
+# def exclude_genes(data):
+#     if data is None:
+#         return []
+#     # Load data from store
+#     loaded_gene_data = pd.read_json(data, orient="records")
+#     # create list for input options
+#     options = loaded_gene_data["Gene symbol"].tolist()
+#     return options
 #FIXME: options list not working yet
 #FIXME: not working on linux yet
 
@@ -130,9 +143,9 @@ def store_excluded_genes(value):
 )
 def display_excluded_genes(value):
     if value is None:
-        return "No Genes Excluded (seperate multiple genes with \",\")"
+        return "No Genes Excluded"
     else:
-        return f'Following Genes are excluded from the Analysis {value}'
+        return f'Following Genes are excluded from the Analysis: {value}'
 
 # Callback to read uploaded meta file and store it
 @app.callback(

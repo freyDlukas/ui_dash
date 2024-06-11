@@ -63,14 +63,13 @@ def render_layout() -> Component:
                                     id="container-gene"
                                 ),  # show genedata (snippet)
                                 html.Br(),
-                                dcc.Input(
+                                dcc.Dropdown(
                                     id="excluded-genes",
-                                    type="text",
-                                    placeholder=" Genes to exclude",
-                                    multiple = True,
-                                    list = "store-gene-options",
-                                    autoComplete = "on",
-
+                                    options = [],
+                                    placeholder="Select Genes to Exclude",
+                                    multi=True,
+                                    optionHeight=50,
+                                    style={"border": "none", "box-shadow": "none"},
                                 ),
                                 html.Br(),
                                 html.Br(),
