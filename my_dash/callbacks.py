@@ -9,6 +9,7 @@ from dash import Input, Output, State, dash_table
 from .app import app
 
 #FIXME: not working on linux yet (create folder)
+#TODO: Logging
 
 # Define data types and excluded columns
 types = {
