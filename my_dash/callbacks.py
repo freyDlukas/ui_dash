@@ -99,6 +99,14 @@ def display_genedata(data):
         columns=[{"name": i, "id": i} for i in loaded_gene_data.columns],
         page_size=10,
         style_table={"overflowX": "auto"},
+        style_header={
+        'backgroundColor': 'rgb(30, 30, 30)',
+        'color': 'white'
+        },
+        style_data={
+        'backgroundColor': 'rgb(50, 50, 50)',
+        'color': 'white'
+        },
     )
 # Populate gene options in dropdown
 @app.callback(
