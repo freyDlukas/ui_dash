@@ -116,6 +116,14 @@ def render_layout() -> Component:
                     export_format="csv",
                     virtualization=True,
                     filter_action="custom",
+                    style_header={
+                        'backgroundColor': 'rgb(30, 30, 30)',
+                        'color': 'white'
+                    },
+                    style_data={
+                        'backgroundColor': 'rgb(50, 50, 50)',
+                        'color': 'white'
+                    },
                 ),
                 dcc.Store(id="store-a-table"),
                 html.Hr(),
@@ -140,6 +148,14 @@ def render_layout() -> Component:
                     export_format="csv",
                     virtualization=True,
                     filter_action="custom",
+                    style_header={
+                        'backgroundColor': 'rgb(30, 30, 30)',
+                        'color': 'white'
+                    },
+                    style_data={
+                        'backgroundColor': 'rgb(50, 50, 50)',
+                        'color': 'white'
+                    },
                 ),
                 dcc.Store(id="store-b-table"),
                 html.Hr(),
