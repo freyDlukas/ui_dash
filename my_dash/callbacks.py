@@ -10,6 +10,7 @@ from .app import app
 
 #FIXME: not working on linux yet (create folder)
 #TODO: Logging
+#NOTE: If Control Genes = True include them if empty list exclude them
 
 # Define data types and excluded columns
 types = {
@@ -343,7 +344,7 @@ def construct_filter(derived_query_structure, df, complexOperator=None):
 # json
 @app.callback(
     Output("storage", "children"),
-    Input("start_analysis", "n_clicks"),
+    Input("start-analysis", "n_clicks"),
     [
         State("store-a", "data"),
         State("store-b", "data"),
@@ -377,7 +378,7 @@ def store_files(
         with open(path + "excluded_genes.txt", "w") as file:
             file.write(str(excluded_genes))
         with open(path + "control_genes.txt", "w") as file:
-            file.write(control_genes)
+            file.write(str(control_genes))
         gene = pd.read_json(gene, orient="records")
         meta = pd.read_json(meta, orient="records")
         table_a = pd.read_json(table_a, orient="records")

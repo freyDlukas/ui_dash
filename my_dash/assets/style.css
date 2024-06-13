@@ -1,0 +1,216 @@
+/* TODO: Export Buttons
+   TODO: Filter Row of the DataTables
+*/
+
+/* General card styling for dark mode */
+.card {
+    margin-bottom: 20px; /* Adds space between cards */
+    border-radius: 10px; /* Rounds the corners of the cards */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow */
+    border: none; /* Removes default border */
+    background-color: #2c2c2c; /* Dark background color */
+    color: #eaeaea; /* Light text color */
+    transition: box-shadow 0.2s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for cards */
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Increases shadow on hover */
+}
+
+/* Card body styling */
+.card-body {
+    padding: 20px; /* Adds consistent padding inside cards */
+    color: #eaeaea; /* Lighter text color */
+}
+
+/* Card header styling */
+.card-header {
+    background-color: #007bff; /* Sets the header background color */
+    color: white; /* Sets the text color to white */
+    font-size: 1.25rem; /* Increases the font size */
+    border-top-left-radius: 10px; /* Rounds the top-left corner */
+    border-top-right-radius: 10px; /* Rounds the top-right corner */
+    padding: 15px; /* Adds padding inside the header */
+}
+
+/* Card footer styling */
+.card-footer {
+    background-color: #343a40; /* Sets a darker background color for the footer */
+    border-bottom-left-radius: 10px; /* Rounds the bottom-left corner */
+    border-bottom-right-radius: 10px; /* Rounds the bottom-right corner */
+    padding: 15px; /* Adds padding inside the footer */
+    text-align: right; /* Aligns the footer content to the right */
+}
+
+/* Button styling inside card */
+.card-body .btn {
+    background-color: #007bff; /* Sets the button background color */
+    color: white; /* Sets the button text color */
+    border: none; /* Removes the button border */
+    border-radius: 5px; /* Rounds the button corners */
+    padding: 10px 20px; /* Adds padding inside the button */
+    transition: background-color 0.2s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for buttons */
+.card-body .btn:hover {
+    background-color: #0056b3; /* Darkens the button background color */
+}
+
+
+
+
+
+/* Input styling inside card */
+.card-body .form-control {
+    border-radius: 5px; /* Rounds the input corners */
+    padding: 10px; /* Adds padding inside the input */
+    background-color: #495057; /* Dark background color for input */
+    color: white; /* Light text color */
+    border: none; /* Removes default border */
+}
+
+/* Placeholder text styling */
+.card-body .form-control::placeholder {
+    color: white; /* White color for placeholder text */
+}
+
+/* Overall page background */
+body {
+    background-color: #1c1c1c; /* Dark background color for the page */
+    color: #eaeaea; /* Light text color for the page */
+}
+
+/* Input placeholder text */
+::placeholder {
+    color: white; /* White color for placeholder text */
+}
+
+/* DataTable styling */
+.dash-table-container .dash-spreadsheet {
+    background-color: #2c2c2c;
+    color: #eaeaea;
+}
+
+.dash-table-container .dash-spreadsheet-container .dash-header {
+    background-color: #3c3c3c;
+    color: #eaeaea;
+}
+
+.dash-table-container .dash-spreadsheet-container .dash-cell {
+    background-color: #2c2c2c;
+    color: #eaeaea;
+}
+
+/* Hover effect for DataTable rows */
+.dash-table-container .dash-spreadsheet-container .dash-row:hover {
+    background-color: #3c3c3c;
+}
+
+/* Textarea styling */
+textarea {
+    background-color: #2c2c2c;
+    color: #eaeaea;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* FormText styling */
+.form-text {
+    color: #eaeaea;
+}
+
+/* Checklist styling */
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* General hover effect for components */
+.component:hover {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3); /* Adds a light shadow */
+    background-color: #3c3c3c; /* Slightly darkens the background color */
+    color: #ffffff; /* Ensures text color is white on hover */
+}
+
+/* Custom CSS for the dropdown */
+.dropdown-darkmode .Select-control {
+    background-color: #303030;  /* Dark grey background */
+    color: #CCCCCC;  /* Light grey text color */
+    border: none;  /* No border */
+    box-shadow: none;  /* No box shadow */
+}
+
+/* Placeholder text color */
+.dropdown-darkmode .Select-placeholder {
+    color: #CCCCCC;  /* Light grey placeholder text color */
+}
+
+/* Dropdown menu options color */
+.dropdown-darkmode .Select-menu-outer {
+    background-color: #303030;  /* Dark grey background */
+}
+
+/* Selected option color */
+.dropdown-darkmode .Select-option.is-selected {
+    background-color: #444;  /* Darker grey for selected option */
+}
+
+/* Hover effect for options */
+.dropdown-darkmode .Select-option.is-focused {
+    background-color: #555;  /* Slightly darker grey on hover */
+}
+
+//* Custom styles for dcc.Upload */
+.upload-custom {
+    border: 2px dashed #CCCCCC;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #666666;
+    background-color: #f9f9f9;
+}
+
+.upload-custom button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.upload-custom .upload-area {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #e9ecef; /* Light grey background for upload area */
+    color: #495057; /* Dark grey text color */
+    transition: background-color 0.3s ease;
+}
+
+.upload-custom .upload-area:hover {
+    background-color: #d3d3d3; /* Darken background color on hover */
+}
+
+.upload-custom .upload-icon {
+    font-size: 48px; /* Adjust icon size */
+    margin-bottom: 10px; /* Space below icon */
+}
+
+.custom-input {
+    margin-bottom: 20px;
+}
+
+.custom-header {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 42px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
