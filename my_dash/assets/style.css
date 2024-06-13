@@ -165,44 +165,50 @@ textarea {
 
 /* Custom styles for dcc.Upload */
 .upload-custom {
-    border: 2px dashed #CCCCCC;
+    border: 2px dashed #007bff;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     font-size: 16px;
     color: #666666;
-    background-color: #f9f9f9;
+    background-color: #505050;
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+    margin-top: 10px;
 }
 
 .upload-custom button {
-    background-color: #007bff;
+    background-color: #505050;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 15px 30px; /* Increased padding for larger button */
+    font-size: 18px; /* Increased font size for larger button */
     border-radius: 5px;
+    display: block; /* Ensures button spans full width of parent */
+    margin: 0 auto; /* Centers button horizontally */
+    width: 100%;
+    height: 100%;
 }
 
 .upload-custom .upload-area {
+    display: flex; /* Use flexbox to center button vertically and horizontally */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
     padding: 20px;
     border-radius: 10px;
-    background-color: #e9ecef; /* Light grey background for upload area */
-    color: #495057; /* Dark grey text color */
+    background-color: #505050; /* Darker grey background for upload area */
+    color: #ffffff; /* White text color */
     transition: background-color 0.3s ease;
+    cursor: pointer; /* Change cursor to pointer on hover */
 }
 
 .upload-custom .upload-area:hover {
-    background-color: #d3d3d3; /* Darken background color on hover */
-}
-
-.upload-custom .upload-icon {
-    font-size: 48px; /* Adjust icon size */
-    margin-bottom: 10px; /* Space below icon */
+    background-color: #606060; /* Slightly lighter shade on hover */
 }
 
 .custom-input {
     margin-bottom: 20px;
 }
+
 
 .custom-header {
     background-color: #007BFF;
