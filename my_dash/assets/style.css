@@ -165,7 +165,7 @@ textarea {
 
 /* Custom styles for dcc.Upload */
 .upload-custom {
-    border: 2px dashed #007bff;
+    border: 2px dashed rgb(188, 188, 188);
     border-radius: 10px;
     padding: 10px;
     text-align: center;
