@@ -163,7 +163,7 @@ textarea {
     background-color: #555;  /* Slightly darker grey on hover */
 }
 
-//* Custom styles for dcc.Upload */
+/* Custom styles for dcc.Upload */
 .upload-custom {
     border: 2px dashed #CCCCCC;
     border-radius: 10px;
