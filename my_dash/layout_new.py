@@ -3,6 +3,13 @@ from dash.dash_table import DataTable
 from dash.development.base_component import Component
 import dash_bootstrap_components as dbc
 #TODO: Add Fade Objects for Explanations
+#TODO: Add Pages one for explanation and one for the actual analysis, FAQ Page?, Contact Page?
+#TODO: Navbar for the pages
+#TODO: Add loading spinner
+#TODO: Input Mail for the user
+#TODO: Send Mail to user with link to the results page / make results page on website? (Download Button?)
+#TODO: Switch if user wants Graphs or just the results
+#TODO: 
 
 def render_layout() -> Component:
     return dbc.Container(
