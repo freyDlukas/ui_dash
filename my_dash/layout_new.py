@@ -3,9 +3,9 @@ from dash.dash_table import DataTable
 from dash.development.base_component import Component
 import dash_bootstrap_components as dbc
 #DONE: Add Fade Objects for Explanations
-#TODO: Add Pages one for explanation and one for the actual analysis, FAQ Page?, Contact Page?
-#TODO: Navbar for the pages
-#TODO: Add loading spinner
+########TODO: Add Pages one for explanation and one for the actual analysis, FAQ Page?, Contact Page?
+########TODO: Navbar for the pages
+##TODO: Add loading spinner
 #TODO: Input Mail for the user
 #TODO: Send Mail to user with link to the results page / make results page on website? (Download Button?)
 #TODO: Add Section for the user to specify the Analysis
