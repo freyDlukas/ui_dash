@@ -20,8 +20,8 @@ def render_layout() -> Component:
             html.Header(
                 children=[
                     "Analysis",
-                    dbc.Button("Help", id="help-toggle", color="primary", className="help-button", n_clicks=0),
-                    dbc.Button("Info", id="info-toggle", color="primary", className="info-button", n_clicks=0),
+                    dbc.Button("Help", id="help-toggle", color="primary", className="help-button help", n_clicks=0),
+                    dbc.Button("Info", id="info-toggle", color="primary", className="help-button info", n_clicks=0),
                     dbc.Offcanvas(
                         html.P("This is the Help Section"
                                "INFOOOOOO"
@@ -30,6 +30,7 @@ def render_layout() -> Component:
                         id="offcanvas",
                         title="Info",
                         is_open=False,
+                        className="custom-offcanvas",
                     )
                 ],
                 className="custom-header"

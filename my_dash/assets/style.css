@@ -2,6 +2,7 @@
    TODO: Filter Row of the DataTables style
    DONE: style dbc.Tooltip
    TODO: DEsign offcanvas
+   TODO: Align Buttons in Header
 */
 
 /* General card styling for dark mode */
@@ -424,5 +425,41 @@ textarea {
 /* Remove the default arrow */
 .custom-tooltip .tooltip-arrow {
     display: none;
+}
+
+/* Custom styles for the offcanvas */
+.custom-offcanvas {
+    background-color: #2c2c2c; /* Dark background color */
+    color: #ffffff; /* White text color */
+    border: 1px solid #444; /* Border color for better visibility */
+}
+
+.custom-offcanvas .offcanvas-header {
+    border-bottom: 1px solid #444; /* Border color for header */
+}
+
+.custom-offcanvas .offcanvas-title {
+    color: #ffffff; /* White text color for title */
+}
+
+.custom-offcanvas .offcanvas-body {
+    color: #cccccc; /* Light gray text color for body */
+}
+
+/* Custom styles for the close button */
+.custom-offcanvas .btn-close {
+    color: #ffffff; /* White color for close button */
+    filter: invert(1); /* Invert color for dark mode */
+    opacity: 1; /* Make sure the close button is fully opaque */
+}
+
+/* Hover effect for the close button */
+.custom-offcanvas .btn-close:hover {
+    color: #cccccc; /* Slightly lighter color on hover */
+}
+
+/* Custom styles for the backdrop */
+.custom-offcanvas-backdrop {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark backdrop */
 }
 
