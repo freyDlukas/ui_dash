@@ -22,8 +22,34 @@ types = {
 }
 excluded_columns = ["ID", "name"]
 
+# Callback to toggle alerts
+@app.callback(
+    [
+        Output("alert-upload", "is_open"),
+        Output("alert-gene", "is_open"),
+        Output("alert-control", "is_open"),
+        Output("alert-meta", "is_open"),
+    ],
+    [Input("help-toggle", "n_clicks")],
+    [
+        State("alert-upload", "is_open"),
+        State("alert-gene", "is_open"),
+        State("alert-control", "is_open"),
+        State("alert-meta", "is_open"),
+    ]
+)
+def toggle_alerts(n_clicks, is_open_upload, is_open_gene, is_open_control, is_open_meta):
+    if n_clicks:
+        # If all alerts are open, close all alerts
+        if is_open_upload and is_open_gene and is_open_control and is_open_meta:
+            return False, False, False, False
+        else:
+            # If any alert is closed, open all alerts
+            return True, True, True, True
+    # Default to return the current state of the alerts
+    return is_open_upload, is_open_gene, is_open_control, is_open_meta
 
-# Callback to store analysis name
+
 @app.callback(Output("store-analysis", "data"), Input("input-analysis", "value"))
 def name_analysis(value):
     if value is None:

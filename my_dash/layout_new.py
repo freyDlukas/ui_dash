@@ -2,24 +2,39 @@ from dash import dcc, html
 from dash.dash_table import DataTable
 from dash.development.base_component import Component
 import dash_bootstrap_components as dbc
-#TODO: Add Fade Objects for Explanations
+#DONE: Add Fade Objects for Explanations
 #TODO: Add Pages one for explanation and one for the actual analysis, FAQ Page?, Contact Page?
 #TODO: Navbar for the pages
 #TODO: Add loading spinner
 #TODO: Input Mail for the user
 #TODO: Send Mail to user with link to the results page / make results page on website? (Download Button?)
-#TODO: Switch if user wants Graphs or just the results
-#TODO: 
+#TODO: Add Section for the user to specify the Analysis
+    #TODO: Switch if user wants Graphs or just the results
+    #TODO: Deseq2 and/or Limma, EdgeR?
+    #TODO: Define Dataset for GSEA?
 
 def render_layout() -> Component:
     return dbc.Container(
         children=[
-            html.Header("Analyses", className="custom-header"),
+            html.Header(
+                children=[
+                    "Analyses",
+                    dbc.Button("Help", id="help-toggle", color="primary", className="help-button")
+                ],
+                className="custom-header"
+            ),
             dbc.Card(
                 children=[
                     dbc.CardBody(
                         children=[
                             html.H3("Upload Data"),
+                            dbc.Alert(
+                                "Upload your Gene Data and Meta Data files either by Drag and Drop or by clicking the buttons below. Use CSV or Excel Sheet.",
+                                id="alert-upload",
+                                is_open=True,
+                                dismissable=True,
+                                className="custom-alert",
+                            ),
                             dbc.Row(
                                 children=[
                                     dbc.Col(
@@ -61,6 +76,13 @@ def render_layout() -> Component:
                                 data=[],
                             ),
                             html.Div(id="container-gene"),
+                            dbc.Alert(
+                                "Select Genes to Exclude from the Analysis. You can also search for genes by typing.",
+                                id="alert-gene",
+                                is_open=True,
+                                dismissable=True,
+                                className="custom-alert",
+                            ),
                             dcc.Dropdown(
                                 id="excluded-genes",
                                 options=[],
@@ -90,6 +112,13 @@ def render_layout() -> Component:
                     dbc.CardBody(
                         children=[
                             html.H3("Meta Data"),
+                            dbc.Alert(
+                                "Use the | symbol to filter for multiple Values in a single column. For example: Value1|Value2|Value3",
+                                id="alert-meta",
+                                is_open=True,
+                                dismissable=True,
+                                className="custom-alert meta",
+                            ),
                             dbc.Card(
                                 dbc.CardBody(
                                     children=[
@@ -160,15 +189,22 @@ def render_layout() -> Component:
                         children=[
                             html.H3("Finalize Analysis"),
                             dbc.Input(id="input-analysis", type="text", placeholder="Name Analysis", className="custom-input"),
-                            dbc.FormText("Include Control Genes in Analysis?"),
+                            dbc.Alert(
+                                "Activate Switch to include Control Genes in the Analysis.",
+                                id="alert-control",
+                                is_open=True,
+                                dismissable=True,
+                                className="custom-alert",
+                            ),
                             dbc.Checklist(
                                 id="controlgenes",
                                 options=[
                                     {"label": "Control Genes", "value": True},
                                 ],
-                                value=[True],
+                                value=[False],
                                 switch=True,
                                 style={"marginBottom": "15px"},
+                                className="custom-checklist",
                             ),
                             dcc.Store(id="store-controlgenes"),
                             dcc.Store(id="store-analysis"),
