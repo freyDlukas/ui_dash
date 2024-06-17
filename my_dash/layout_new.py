@@ -12,7 +12,7 @@ import dash_bootstrap_components as dbc
     #DONE: Switch if user wants Graphs or just the results
     #DONE: Deseq2 and/or Limma, EdgeR?
     #DONE: Define Dataset for GSEA?
-#TODO: ADD OFFcanvas for more Information
+#TODO: ADD OFFcanvas for more Information (align right from help Button)
 
 def render_layout() -> Component:
     return dbc.Container(
@@ -20,7 +20,17 @@ def render_layout() -> Component:
             html.Header(
                 children=[
                     "Analysis",
-                    dbc.Button("Help", id="help-toggle", color="primary", className="help-button")
+                    dbc.Button("Help", id="help-toggle", color="primary", className="help-button", n_clicks=0),
+                    dbc.Button("Info", id="info-toggle", color="primary", className="info-button", n_clicks=0),
+                    dbc.Offcanvas(
+                        html.P("This is the Help Section"
+                               "INFOOOOOO"
+                               "INFOOOO",
+                               ),
+                        id="offcanvas",
+                        title="Info",
+                        is_open=False,
+                    )
                 ],
                 className="custom-header"
             ),

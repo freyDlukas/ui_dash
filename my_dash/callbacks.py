@@ -462,3 +462,14 @@ def store_files(
 #         return "Analysis started."
 #     return ""
 
+
+
+@app.callback(
+    Output("offcanvas", "is_open"),
+    Input("info-toggle", "n_clicks"),
+    [State("offcanvas", "is_open")],
+)
+def toggle_offcanvas(n1, is_open):
+    if n1:
+        return not is_open
+    return is_open
