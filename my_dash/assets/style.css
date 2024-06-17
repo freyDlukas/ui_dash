@@ -1,6 +1,6 @@
 /* TODO: Export Buttons Style
    TODO: Filter Row of the DataTables style
-   TODO: style dbc.Tooltip
+   DONE: style dbc.Tooltip
 */
 
 /* General card styling for dark mode */
@@ -409,3 +409,19 @@ textarea {
 .custom-checker .form-check-inline {
     margin-right: 30px; /* Adjust this value to control spacing between checkboxes */
 }
+
+/* Custom styles for the tooltip */
+.custom-tooltip .tooltip-inner {
+    background-color: #2c2c2c; /* Dark background color */
+    color: #ffffff; /* White text color */
+    font-size: 14px; /* Adjust the font size */
+    padding: 8px 12px; /* Add padding for better readability */
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #444; /* Border to distinguish the tooltip */
+}
+
+/* Remove the default arrow */
+.custom-tooltip .tooltip-arrow {
+    display: none;
+}
+

@@ -210,6 +210,7 @@ def render_layout() -> Component:
                                 "Activate Switch to include Control Genes in the Analysis.",
                                 target="check-controlgenes",
                                 placement="top-start",
+                                className="custom-tooltip",
                             ),
                             dcc.Store(id="store-controlgenes"),
                             dbc.Checklist(
@@ -227,6 +228,7 @@ def render_layout() -> Component:
                                 "Deactivte if you just want the Result Tables without Graphs.",
                                 target="check-graphs",
                                 placement="top-start",
+                                className="custom-tooltip",
                             ),
                             dbc.Checklist(
                                 options=[
@@ -244,6 +246,7 @@ def render_layout() -> Component:
                                 "Select the \"Differential Expression Analysis\"-Tool you want to use. You can select multiple Tools, but the Analysis will take longer.",
                                 target="check-dea",
                                 placement="top-start", 
+                                className="custom-tooltip",
                             ),
                             dcc.Store(id="store-dea"),
                             dbc.Input(id="input-gsea", type="text", placeholder="GSEA Dataset", className="custom-input"),
@@ -253,6 +256,7 @@ def render_layout() -> Component:
                                 "For example: GO_Biological_Process_2018, KEGG_2019_Human, Reactome_2016",
                                 target="input-gsea",
                                 placement="top-start",
+                                className="custom-tooltip",
                             ),
                         ]
                     ),
