@@ -9,7 +9,7 @@ from dash import Input, Output, State, dash_table
 from .app import app
 
 #FIXME: not working on linux yet (create folder)
-#TODO: Logging
+#TODO: Logging (1 at least one dea has to be selected, 2 check if 2 different files are uploaded, ...)
 #NOTE: If Control Genes = True include them if empty list exclude them
 
 # Define data types and excluded columns
@@ -27,27 +27,27 @@ excluded_columns = ["ID", "name"]
     [
         Output("alert-upload", "is_open"),
         Output("alert-gene", "is_open"),
-        Output("alert-control", "is_open"),
         Output("alert-meta", "is_open"),
+        Output("alert-tooltip", "is_open"),
     ],
     [Input("help-toggle", "n_clicks")],
     [
         State("alert-upload", "is_open"),
         State("alert-gene", "is_open"),
-        State("alert-control", "is_open"),
         State("alert-meta", "is_open"),
+        State("alert-tooltip", "is_open"),
     ]
 )
-def toggle_alerts(n_clicks, is_open_upload, is_open_gene, is_open_control, is_open_meta):
+def toggle_alerts(n_clicks, is_open_upload, is_open_gene, is_open_meta, is_open_tooltip):
     if n_clicks:
         # If all alerts are open, close all alerts
-        if is_open_upload and is_open_gene and is_open_control and is_open_meta:
+        if is_open_upload and is_open_gene and is_open_meta and is_open_tooltip:
             return False, False, False, False
         else:
             # If any alert is closed, open all alerts
             return True, True, True, True
     # Default to return the current state of the alerts
-    return is_open_upload, is_open_gene, is_open_control, is_open_meta
+    return is_open_upload, is_open_gene, is_open_meta, is_open_tooltip
 
 
 @app.callback(Output("store-analysis", "data"), Input("input-analysis", "value"))
@@ -85,10 +85,30 @@ def store_description(value):
         return value
     
 # store control genes yes/no
-@app.callback(Output("store-controlgenes", "data"), Input("controlgenes", "value"))
+@app.callback(Output("store-controlgenes", "data"), Input("check-controlgenes", "value"))
 def store_controlgenes(value):
     return value
 
+#store include Graphs
+@app.callback(Output("store-graphs", "data"), Input("check-graphs", "value"))
+def store_graphs(value):
+    return value
+
+#store Diff Expressions Analyse
+@app.callback(Output("store-dea", "data"), Input("check-dea", "value"))
+def store_dea(value):
+    return value
+
+#store Gene Set Enrichment Analysis
+@app.callback(Output("store-gsea", "data"), Input("input-gsea", "value"))
+
+#store Email
+@app.callback(Output("store-email", "data"), Input("input-email", "value"))
+def store_email(value):
+    if value is None:
+        return
+    else:
+        return value
 
 # Callback to read uploaded gene file and store it
 @app.callback(
@@ -382,10 +402,14 @@ def construct_filter(derived_query_structure, df, complexOperator=None):
         State("store-b-table", "data"),
         State("store-excluded-genes", "data"),
         State("store-controlgenes", "data"),
+        State("store-graphs", "data"),
+        State("store-dea", "data"),
+        State("store-email", "data"),
+        State("store-gsea", "data"),
     ],
 )
 def store_files(
-    n_clicks, group_a, group_b, description, analysis, gene, meta, table_a, table_b, excluded_genes, control_genes
+    n_clicks, group_a, group_b, description, analysis, gene, meta, table_a, table_b, excluded_genes, control_genes, graphs, dea, email, gsea
 ):
     path = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/"
     if n_clicks > 0:
@@ -405,6 +429,15 @@ def store_files(
             file.write(str(excluded_genes))
         with open(path + "control_genes.txt", "w") as file:
             file.write(str(control_genes))
+        with open(path + "graphs.txt", "w") as file:
+            file.write(str(graphs))
+        with open(path + "dea.txt", "w") as file:
+            file.write(str(dea))
+        with open(path + "email.txt", "w") as file:
+            file.write(str(email))
+        with open(path + "gsea.txt", "w") as file:
+            file.write(str(gsea))
+
         gene = pd.read_json(gene, orient="records")
         meta = pd.read_json(meta, orient="records")
         table_a = pd.read_json(table_a, orient="records")

@@ -1,5 +1,6 @@
 /* TODO: Export Buttons Style
-   TODO: Filter Row of the DataTables
+   TODO: Filter Row of the DataTables style
+   TODO: style dbc.Tooltip
 */
 
 /* General card styling for dark mode */
@@ -118,6 +119,7 @@ textarea {
     border-radius: 5px;
     padding: 10px;
     margin-top: 20px;
+    margin-bottom: 20px !important;
 }
 
 /* FormText styling */
@@ -320,4 +322,90 @@ textarea {
 .custom-alert.meta {
     margin-top: 2px !important;
     margin-bottom: 20px !important;
+}
+
+.custom-alert.analyse-settings {
+    margin-top: 2px !important;
+    margin-bottom: 20px !important;
+}
+
+/* Custom styles for the checklist in dark mode */
+.custom-checker .form-check {
+    display: inline-block;
+    margin-right: 30px; /* Increased space between checkboxes */
+    position: relative;
+    cursor: pointer;
+    font-size: 16px;
+    color: #eaeaea; /* Light text color for dark mode */
+}
+
+.custom-checker .form-check-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom-checker .form-check-label {
+    display: inline-block;
+    padding-left: 30px;
+    margin-bottom: 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    border-radius: 10px; /* Add rounded corners */
+    padding: 5px 10px; /* Add padding for background color */
+    background-color: transparent; /* Default background color */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.custom-checker .form-check-label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    background-color: transparent;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.custom-checker .form-check-input:checked ~ .form-check-label::before {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.custom-checker .form-check-input:checked ~ .form-check-label::after {
+    content: "✔";
+    color: white;
+    position: absolute;
+    left: 4px;
+    top: 0px;
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.custom-checker .form-check-input:checked ~ .form-check-label {
+    background-color: #007bff; /* Background color for checked state */
+    color: white;
+}
+
+.custom-checker .form-check-input:hover ~ .form-check-label::before {
+    border-color: #0056b3;
+}
+
+.custom-checker .form-check-label:hover {
+    color: #b3b3b3;
+}
+
+/* Adjust spacing between checkboxes */
+.custom-checker {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+/* Additional spacing for inline checklist items */
+.custom-checker .form-check-inline {
+    margin-right: 30px; /* Adjust this value to control spacing between checkboxes */
 }

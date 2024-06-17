@@ -6,19 +6,20 @@ import dash_bootstrap_components as dbc
 ########TODO: Add Pages one for explanation and one for the actual analysis, FAQ Page?, Contact Page?
 ########TODO: Navbar for the pages
 ##TODO: Add loading spinner
-#TODO: Input Mail for the user
+#DONE: Input Mail for the user
 #TODO: Send Mail to user with link to the results page / make results page on website? (Download Button?)
-#TODO: Add Section for the user to specify the Analysis
-    #TODO: Switch if user wants Graphs or just the results
-    #TODO: Deseq2 and/or Limma, EdgeR?
-    #TODO: Define Dataset for GSEA?
+#DONE: Add Section for the user to specify the Analysis
+    #DONE: Switch if user wants Graphs or just the results
+    #DONE: Deseq2 and/or Limma, EdgeR?
+    #DONE: Define Dataset for GSEA?
+#TODO: ADD OFFcanvas for more Information
 
 def render_layout() -> Component:
     return dbc.Container(
         children=[
             html.Header(
                 children=[
-                    "Analyses",
+                    "Analysis",
                     dbc.Button("Help", id="help-toggle", color="primary", className="help-button")
                 ],
                 className="custom-header"
@@ -187,26 +188,82 @@ def render_layout() -> Component:
                 children=[
                     dbc.CardBody(
                         children=[
-                            html.H3("Finalize Analysis"),
-                            dbc.Input(id="input-analysis", type="text", placeholder="Name Analysis", className="custom-input"),
+                            html.H3("Analysis Settings"),
                             dbc.Alert(
-                                "Activate Switch to include Control Genes in the Analysis.",
-                                id="alert-control",
+                                "Hover over Components to get more Info.",
+                                id="alert-tooltip",
                                 is_open=True,
                                 dismissable=True,
-                                className="custom-alert",
+                                className="custom-alert analyse-settings",
                             ),
                             dbc.Checklist(
-                                id="controlgenes",
+                                id="check-controlgenes",
                                 options=[
                                     {"label": "Control Genes", "value": True},
                                 ],
-                                value=[False],
+                                value=[],
                                 switch=True,
                                 style={"marginBottom": "15px"},
                                 className="custom-checklist",
                             ),
+                            dbc.Tooltip(
+                                "Activate Switch to include Control Genes in the Analysis.",
+                                target="check-controlgenes",
+                                placement="top-start",
+                            ),
                             dcc.Store(id="store-controlgenes"),
+                            dbc.Checklist(
+                                id="check-graphs",
+                                options=[
+                                    {"label": "Graphs", "value": True},
+                                ],
+                                value=[True],
+                                switch=True,
+                                style={"marginBottom": "15px"},
+                                className="custom-checklist",
+                            ),
+                            dcc.Store(id="store-graphs"),
+                            dbc.Tooltip(
+                                "Deactivte if you just want the Result Tables without Graphs.",
+                                target="check-graphs",
+                                placement="top-start",
+                            ),
+                            dbc.Checklist(
+                                options=[
+                                    {"label": "DESeq2", "value": "DESeq2"},
+                                    {"label": "Limma", "value": "Limma"},
+                                    {"label": "EdgeR", "value": "EdgeR"},
+                                ],
+                                id="check-dea",
+                                value=["DESeq2"],
+                                inline=False,
+                                className="custom-checker",
+                                style={"backgroundColor": "#1c1c1c", "padding": "10px"},
+                            ),
+                            dbc.Tooltip(
+                                "Select the \"Differential Expression Analysis\"-Tool you want to use. You can select multiple Tools, but the Analysis will take longer.",
+                                target="check-dea",
+                                placement="top-start", 
+                            ),
+                            dcc.Store(id="store-dea"),
+                            dbc.Input(id="input-gsea", type="text", placeholder="GSEA Dataset", className="custom-input"),
+                            dcc.Store(id="store-gsea"),
+                            dbc.Tooltip(
+                                "Type in the Name of the Dataset, which you want to use for Gene Set Enrichment Analysis. \n"
+                                "For example: GO_Biological_Process_2018, KEGG_2019_Human, Reactome_2016",
+                                target="input-gsea",
+                                placement="top-start",
+                            ),
+                        ]
+                    ),
+                ]
+            ),
+            dbc.Card(
+                children=[
+                    dbc.CardBody(
+                        children=[
+                            html.H3("Finalize Analysis"),
+                            dbc.Input(id="input-analysis", type="text", placeholder="Name Analysis", className="custom-input"),
                             dcc.Store(id="store-analysis"),
                             dbc.Textarea(
                                 id="box-description",
@@ -214,6 +271,8 @@ def render_layout() -> Component:
                                 style={"width": "100%", "height": 300, "marginBottom": "10px"},
                             ),
                             dcc.Store(id="store-description"),
+                            dbc.Input(id="input-email", type="email", placeholder="Your Email", className="custom-input"),
+                            dcc.Store(id="store-email"),
                             dbc.Button("Start Analysis", id="start-analysis", n_clicks=0),
                             html.Div(id="storage"),
                         ]
