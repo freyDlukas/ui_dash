@@ -68,9 +68,6 @@ def render_layout() -> Component:
                         html.Br(),
                         html.Br(),
                         html.Br(),
-                        html.Br(),
-                        html.Br(),
-                        html.Br(),
                         html.P("For further information or suggestions please contact me at: \"lukas-daniel.frey@uni-marburg.de\""),
                         
                         ],
