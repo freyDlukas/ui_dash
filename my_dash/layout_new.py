@@ -14,6 +14,7 @@ import dash_bootstrap_components as dbc
     #DONE: Deseq2 and/or Limma, EdgeR?
     #DONE: Define Dataset for GSEA?
 #DONE: ADD OFFcanvas for more Information (align right from help Button)
+#TODO: Textlayout for the Offcanvas vernünftig machen
 
 def render_layout() -> Component:
     return dbc.Container(
