@@ -5,6 +5,7 @@ import dash_bootstrap_components as dbc
 #DONE: Add Fade Objects for Explanations
 ########TODO: Add Pages one for explanation and one for the actual analysis, FAQ Page?, Contact Page?
 ########TODO: Navbar for the pages
+########TODO: Add Page with this is how your data should look like (pictures)?
 ##TODO: Add loading spinner
 #DONE: Input Mail for the user
 #TODO: Send Mail to user with link to the results page / make results page on website? (Download Button?)
@@ -12,21 +13,66 @@ import dash_bootstrap_components as dbc
     #DONE: Switch if user wants Graphs or just the results
     #DONE: Deseq2 and/or Limma, EdgeR?
     #DONE: Define Dataset for GSEA?
-#TODO: ADD OFFcanvas for more Information (align right from help Button)
+#DONE: ADD OFFcanvas for more Information (align right from help Button)
 
 def render_layout() -> Component:
     return dbc.Container(
         children=[
             html.Header(
                 children=[
-                    "Analysis",
-                    dbc.Button("Help", id="help-toggle", color="primary", className="help-button help", n_clicks=0),
-                    dbc.Button("Info", id="info-toggle", color="primary", className="help-button info", n_clicks=0),
+                    html.Div(
+                        children=[
+                            html.Span("Analysis", className="header-title"),
+                            html.Div(
+                                children=[
+                                    dbc.Button("Help", id="help-toggle", color="primary", className="help-button help", n_clicks=0),
+                                    dbc.Button("Info", id="info-toggle", color="primary", className="help-button info", n_clicks=0),
+                                ],
+                                className="header-buttons"
+                            )
+                        ],
+                        className="header-content"
+                    ),
                     dbc.Offcanvas(
-                        html.P("This is the Help Section"
-                               "INFOOOOOO"
-                               "INFOOOO",
-                               ),
+                        children=[
+                        html.P("This is the Help Section"),
+                        html.Hr(),
+                        html.Br(),
+                        html.Hr(),
+                        html.P("1. Upload your Gene Data and Meta Data files either by Drag and Drop or by clicking the buttons below. Use CSV or Excel Sheet."),
+                        html.P("2. Select Genes to Exclude from the Analysis. You can also search for genes by typing."),
+                        html.P("3. Name your Groups"),
+                        html.P("4 Filter for the Groups you want to compare. Use the \"|\" symbol to filter for multiple Values in a single column. For example: Value1|Value2|Value3"),
+                        html.P("5. Use the \"Analysis Settings\"-Section to specify your Analysis further."),
+                        html.P("6. Name your Analysis and add a Description. Fill in your Email to get the Results/Link to the Results."),
+                        html.P("7. Click on \"Start Analysis\" to start the Analysis."),
+                        html.Hr(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.Br(),
+                        html.P("For further information or suggestions please contact me at: \"lukas-daniel.frey@uni-marburg.de\""),
+                        
+                        ],
                         id="offcanvas",
                         title="Info",
                         is_open=False,
@@ -45,7 +91,7 @@ def render_layout() -> Component:
                                 id="alert-upload",
                                 is_open=True,
                                 dismissable=True,
-                                className="custom-alert",
+                                className="custom-alert upload",
                             ),
                             dbc.Row(
                                 children=[
