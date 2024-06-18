@@ -43,7 +43,7 @@ def render_layout() -> Component:
                         html.P("1. Upload your Gene Data and Meta Data files either by Drag and Drop or by clicking the buttons below. Use CSV or Excel Sheet."),
                         html.P("2. Select Genes to Exclude from the Analysis. You can also search for genes by typing."),
                         html.P("3. Name your Groups"),
-                        html.P("4 Filter for the Groups you want to compare. Use the \"|\" symbol to filter for multiple Values in a single column. For example: Value1|Value2|Value3"),
+                        html.P("4 Filter for the Groups you want to compare. Use the \"|\" symbol to filter for multiple Values in a single column. For example: Value1|Value2|Value3. You can Download your filtered Groups by pressing the Export Button next to the Table"),
                         html.P("5. Use the \"Analysis Settings\"-Section to specify your Analysis further."),
                         html.P("6. Name your Analysis and add a Description. Fill in your Email to get the Results/Link to the Results."),
                         html.P("7. Click on \"Start Analysis\" to start the Analysis."),
