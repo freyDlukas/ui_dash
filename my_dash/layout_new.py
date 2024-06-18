@@ -290,6 +290,7 @@ def render_layout() -> Component:
                                     {"label": "DESeq2", "value": "DESeq2"},
                                     {"label": "Limma", "value": "Limma"},
                                     {"label": "EdgeR", "value": "EdgeR"},
+                                    {"label": "Custom GBG", "value": "GBG"}
                                 ],
                                 id="check-dea",
                                 value=["DESeq2"],
