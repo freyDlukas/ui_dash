@@ -167,7 +167,7 @@ textarea {
 /* Custom CSS for the dropdown */
 .dropdown-darkmode .Select-control {
     background-color: #303030;  /* Dark grey background */
-    color: #CCCCCC;  /* Light grey text color */
+    color: #ffffff;  /* Light grey text color */
     border: none;  /* No border */
     box-shadow: none;  /* No box shadow */
 }
@@ -190,6 +190,11 @@ textarea {
 /* Hover effect for options */
 .dropdown-darkmode .Select-option.is-focused {
     background-color: #555;  /* Slightly darker grey on hover */
+}
+
+/* Input field for search text color */
+.dropdown-darkmode .Select-input input {
+    color: #ffffff;  /* White text color for search input */
 }
 
 /* Upload */

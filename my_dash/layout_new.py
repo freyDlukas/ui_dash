@@ -149,7 +149,7 @@ def render_layout() -> Component:
                                 clearable=True,
                                 style={
                                     "background-color": "#303030",  # Dark grey background
-                                    "color": "#CCCCCC",  # Light grey text color
+                                    "color": "white",  # Light grey text color
                                     "border": "none",  # No border
                                     "box-shadow": "none",  # No box shadow
                                     "marginTop": "15px",
