@@ -166,7 +166,7 @@ def populate_gene_options(data):
     # Load data from store
     loaded_gene_data = pd.read_json(data, orient="records")
     # Create list for dropdown options
-    options = [{"label": gene, "value": gene} for gene in loaded_gene_data["Gene symbol"].tolist()]
+    options = [{"label": gene, "value": gene} for gene in loaded_gene_data.iloc[:,0].tolist()]
     return options
 
 

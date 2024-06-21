@@ -11,3 +11,5 @@ store_cache/*.csv
 *.ipynb
 
 Snakemake/
+Data/.DS_Store
+.DS_Store
