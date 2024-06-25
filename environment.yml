@@ -21,3 +21,4 @@ dependencies:
   - icecream
   - loguru
   - pandera
+  - scipy

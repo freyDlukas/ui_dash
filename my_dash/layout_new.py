@@ -15,6 +15,7 @@ import dash_bootstrap_components as dbc
     #DONE: Define Dataset for GSEA?
 #DONE: ADD OFFcanvas for more Information (align right from help Button)
 #TODO: Textlayout for the Offcanvas vernünftig machen
+#TODO: ADD Red Alert Meta Data has to have 1 column that is the Same as the columns in Gene Data
 
 def render_layout() -> Component:
     return dbc.Container(
@@ -84,6 +85,13 @@ def render_layout() -> Component:
                     dbc.CardBody(
                         children=[
                             html.H3("Upload Data"),
+                            dbc.Alert(
+                                "The uploaded Meta Data has to have 1 column that is the SAME as the columns in Gene Data",
+                                id="alert-merge",
+                                is_open=True,
+                                dismissable=False,
+                                className="custom-alertdanger",
+                            ),
                             dbc.Alert(
                                 "Upload your Gene Data and Meta Data files either by Drag and Drop or by clicking the buttons below. Use CSV or Excel Sheet.",
                                 id="alert-upload",
