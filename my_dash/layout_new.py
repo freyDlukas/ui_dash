@@ -295,10 +295,10 @@ def render_layout() -> Component:
                             ),
                             dbc.Checklist(
                                 options=[
-                                    {"label": "DESeq2", "value": "DESeq2"},
-                                    {"label": "Limma", "value": "Limma"},
-                                    {"label": "EdgeR", "value": "EdgeR"},
-                                    {"label": "Custom GBG", "value": "GBG"}
+                                    {"label": "DESeq2", "value": "deseq2"},
+                                    {"label": "Limma", "value": "limma"},
+                                    {"label": "EdgeR", "value": "edger"},
+                                    {"label": "Custom GBG", "value": "custom_gbg"}
                                 ],
                                 id="check-dea",
                                 value=["DESeq2"],

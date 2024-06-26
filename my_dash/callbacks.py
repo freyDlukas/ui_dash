@@ -452,15 +452,15 @@ def store_files(
 #TODO: throw error when no files are uploaded and start button is clicked
 
 # start script not tested yet, button "cooldown einfügen"
-# @app.callback(
-#     Output("storage", "children"),
-#     Input("start_analysis", "n_clicks"),
-# )
-# def start_analysis(n_clicks):
-#     if n_clicks > 0:
-#         os.system("snakemake --cores 4 -s folder/snakefilename")
-#         return "Analysis started."
-#     return ""
+@app.callback(
+    Output("storage", "children"),
+    Input("start_analysis", "n_clicks"),
+)
+def start_analysis(n_clicks):
+    if n_clicks > 0:
+        os.system('python3 /Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/my_dash/scripts/start_analysis.py')
+        return "Analysis started."
+    return ""
 
 
 
