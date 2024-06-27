@@ -26,12 +26,12 @@ def remove_old_folders(directory, days=30):
                 print(f"Removed {item_path}")
 
 # cleanup cache
-directory_to_clean = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/cache/"
+directory_to_clean = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/"
 remove_old_folders(directory_to_clean)
 
 # create folder with timestamp
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-folder = f"/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/cache/cache_{timestamp}"
+folder = f"/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/cache/{timestamp}"
 os.makedirs(folder)
 # copy data from cache to folder
 shutil.move("/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache", folder)
@@ -62,6 +62,11 @@ def parse_content(content):
         pass
     return [content]
 
+
+def add_timestamp(data):
+    data['timestamp'] = timestamp
+
+
 # Read existing data from the YAML file
 config = '/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/Snakemake/config.yaml'
 text_files = [dea, analysis, control_genes, description, email, excluded_genes, graphs, group_a, group_b, gsea]
@@ -79,6 +84,9 @@ for file_path in text_files:
         # Use the file name (without extension) as the key
         key = os.path.splitext(os.path.basename(file_path))[0]
         existing_data[key] = parse_content(file_content)
+
+# Add timestamp to existing data
+add_timestamp(existing_data)
 
 # Write the updated data back to the YAML file
 with open(config, 'w') as yaml_file:
