@@ -385,7 +385,7 @@ def construct_filter(derived_query_structure, df, complexOperator=None):
     )
 
 
-###start analysis button /Users/lukas-danielf/Documents/Pathologie Marburg/dashtest/dashtest/store_cache
+###start analysis button /Users/lukas-danielf/Documents/PathologieMarburg/dashtest/dashtest/store_cache
 # save Stores to files
 # json
 @app.callback(
@@ -418,7 +418,7 @@ def handle_analysis(
         if not all([group_a, group_b, analysis, gene, meta, table_a, table_b, dea]):
             return "Error: Some files are missing.", "", False
 
-        path = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/"
+        path = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/"
         if not os.path.exists(path):
             os.makedirs(path)
         
@@ -451,7 +451,7 @@ def handle_analysis(
         pd.read_json(table_b, orient="records").to_csv(os.path.join(path, "group_b.csv"), index=False)
 
         # Trigger the analysis script
-        os.system('python3 /Users/lukas-danielf/Documents/Pathologie_Marburg/ui_dash/my_dash/scripts/start_analysis.py')
+        os.system('python3 /Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/my_dash/scripts/start_analysis.py')
         
         return "Files saved successfully.", "Analysis started.", True
 

@@ -22,3 +22,5 @@ dependencies:
   - loguru
   - pandera
   - scipy
+  - pip:
+    - snakemake

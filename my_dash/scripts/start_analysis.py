@@ -26,29 +26,29 @@ def remove_old_folders(directory, days=30):
                 print(f"Removed {item_path}")
 
 # cleanup cache
-directory_to_clean = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/"
+directory_to_clean = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/"
 remove_old_folders(directory_to_clean)
 
 # create folder with timestamp
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-folder = f"/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/cache/{timestamp}"
+folder = f"/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/cache/{timestamp}"
 os.makedirs(folder)
 # copy data from cache to folder
-shutil.move("/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache", folder)
+shutil.move("/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache", folder)
 
 
 #write the config file
 #paths
-dea = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/dea.txt"
-analysis = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/analysis.txt"
-control_genes = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/control_genes.txt"
-description = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/description.txt"
-email = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/email.txt"
-excluded_genes = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/excluded_genes.txt"
-graphs = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/graphs.txt"
-group_a = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/group_a.txt"
-group_b = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/group_b.txt"
-gsea = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/gsea.txt"
+dea = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/dea.txt"
+analysis = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/analysis.txt"
+control_genes = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/control_genes.txt"
+description = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/description.txt"
+email = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/email.txt"
+excluded_genes = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/excluded_genes.txt"
+graphs = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/graphs.txt"
+group_a = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/group_a.txt"
+group_b = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/group_b.txt"
+gsea = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/gsea.txt"
 
 # Function to parse file content into the desired format
 def parse_content(content):
@@ -68,7 +68,7 @@ def add_timestamp(data):
 
 
 # Read existing data from the YAML file
-config = '/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/Snakemake/config.yaml'
+config = '/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/Snakemake/config.yaml'
 text_files = [dea, analysis, control_genes, description, email, excluded_genes, graphs, group_a, group_b, gsea]
 
 try:
@@ -104,7 +104,7 @@ processes = []
 
 # Iterate through each analysis and run Snakemake sequentially
 for analysis in analyses:
-    command = f"snakemake -s /Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/Snakemake/snakefiles/{analysis}"
+    command = f"snakemake -s /Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/Snakemake/snakefiles/{analysis}"
     print(f"Running: {analysis}")
     
     # Run the command in a subprocess
