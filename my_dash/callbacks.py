@@ -389,7 +389,9 @@ def construct_filter(derived_query_structure, df, complexOperator=None):
 # save Stores to files
 # json
 @app.callback(
-    Output("storage", "children"),
+    [Output("storage", "children"),
+     Output("container-analysis", "children"),
+     Output("start-analysis", "disabled")],
     Input("start-analysis", "n_clicks"),
     [
         State("store-a", "data"),
@@ -406,61 +408,54 @@ def construct_filter(derived_query_structure, df, complexOperator=None):
         State("store-dea", "data"),
         State("store-email", "data"),
         State("store-gsea", "data"),
-    ],
+    ]
 )
-def store_files(
+def handle_analysis(
     n_clicks, group_a, group_b, description, analysis, gene, meta, table_a, table_b, excluded_genes, control_genes, graphs, dea, email, gsea
 ):
-    path = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/"
     if n_clicks > 0:
-       #Check if Folder exists if not create it
+        # Check if any critical files are missing
+        if not all([group_a, group_b, analysis, gene, meta, table_a, table_b, dea]):
+            return "Error: Some files are missing.", "", False
+
+        path = "/Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/store_cache/"
         if not os.path.exists(path):
             os.makedirs(path)
-        # Save Group A, Group B, and Description to files
-        with open(path + "group_a.txt", "w") as file:
+        
+        # Save text data to files
+        with open(os.path.join(path, "group_a.txt"), "w") as file:
             file.write(group_a)
-        with open(path + "group_b.txt", "w") as file:
+        with open(os.path.join(path, "group_b.txt"), "w") as file:
             file.write(group_b)
-        with open(path + "description.txt", "w") as file:
+        with open(os.path.join(path, "description.txt"), "w") as file:
             file.write(description)
-        with open(path + "analysis.txt", "w") as file:
+        with open(os.path.join(path, "analysis.txt"), "w") as file:
             file.write(analysis)
-        with open(path + "excluded_genes.txt", "w") as file:
+        with open(os.path.join(path, "excluded_genes.txt"), "w") as file:
             file.write(str(excluded_genes))
-        with open(path + "control_genes.txt", "w") as file:
+        with open(os.path.join(path, "control_genes.txt"), "w") as file:
             file.write(str(control_genes))
-        with open(path + "graphs.txt", "w") as file:
+        with open(os.path.join(path, "graphs.txt"), "w") as file:
             file.write(str(graphs))
-        with open(path + "dea.txt", "w") as file:
+        with open(os.path.join(path, "dea.txt"), "w") as file:
             file.write(str(dea))
-        with open(path + "email.txt", "w") as file:
+        with open(os.path.join(path, "email.txt"), "w") as file:
             file.write(str(email))
-        with open(path + "gsea.txt", "w") as file:
+        with open(os.path.join(path, "gsea.txt"), "w") as file:
             file.write(str(gsea))
 
-        gene = pd.read_json(gene, orient="records")
-        meta = pd.read_json(meta, orient="records")
-        table_a = pd.read_json(table_a, orient="records")
-        table_b = pd.read_json(table_b, orient="records")
-        gene.to_csv(path + "gene.csv", index=False)
-        meta.to_csv(path + "meta.csv", index=False)
-        table_a.to_csv(path + "group_a.csv", index=False)
-        table_b.to_csv(path + "group_b.csv", index=False)
-        return "Files saved successfully."
-    return ""
+        # Save DataFrame data to CSV
+        pd.read_json(gene, orient="records").to_csv(os.path.join(path, "gene.csv"), index=False)
+        pd.read_json(meta, orient="records").to_csv(os.path.join(path, "meta.csv"), index=False)
+        pd.read_json(table_a, orient="records").to_csv(os.path.join(path, "group_a.csv"), index=False)
+        pd.read_json(table_b, orient="records").to_csv(os.path.join(path, "group_b.csv"), index=False)
 
-#TODO: throw error when no files are uploaded and start button is clicked
+        # Trigger the analysis script
+        os.system('python3 /Users/lukas-danielf/Documents/Pathologie_Marburg/ui_dash/my_dash/scripts/start_analysis.py')
+        
+        return "Files saved successfully.", "Analysis started.", True
 
-# start script not tested yet, button "cooldown einfügen"
-@app.callback(
-    Output("storage", "children"),
-    Input("start_analysis", "n_clicks"),
-)
-def start_analysis(n_clicks):
-    if n_clicks > 0:
-        os.system('python3 /Users/lukas-danielf/Documents/Pathologie Marburg/ui_dash/my_dash/scripts/start_analysis.py')
-        return "Analysis started."
-    return ""
+    return "", "", False
 
 
 

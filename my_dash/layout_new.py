@@ -343,6 +343,7 @@ def render_layout() -> Component:
                             dcc.Store(id="store-email"),
                             dbc.Button("Start Analysis", id="start-analysis", n_clicks=0),
                             html.Div(id="storage"),
+                            html.Div(id="container-analysis"),
                         ]
                     )
                 ]
