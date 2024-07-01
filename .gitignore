@@ -24,3 +24,6 @@ store_cache/*.csv
 Snakemake/
 Data/.DS_Store
 .DS_Store
+node_modules
+.snakemake/conda*
+.snakemake*
