@@ -27,3 +27,4 @@ Data/.DS_Store
 node_modules
 .snakemake/conda*
 .snakemake*
+.zshrc
