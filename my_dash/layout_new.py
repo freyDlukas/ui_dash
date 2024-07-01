@@ -301,7 +301,7 @@ def render_layout() -> Component:
                                     {"label": "Custom GBG", "value": "custom_gbg"}
                                 ],
                                 id="check-dea",
-                                value=["DESeq2"],
+                                value=[],
                                 inline=False,
                                 className="custom-checker",
                                 style={"backgroundColor": "#1c1c1c", "padding": "10px"},

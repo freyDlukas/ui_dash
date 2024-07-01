@@ -24,3 +24,5 @@ dependencies:
   - scipy
   - pip:
     - snakemake
+    - dash-bootstrap-components
+    - pyyaml

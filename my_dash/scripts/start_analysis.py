@@ -1,11 +1,10 @@
 import os
 import shutil
-from datetime import datetime, timedelta
-import yaml
-import ast
 import subprocess
+import yaml
+from datetime import datetime, timedelta
+import ast
 
-# remove folders older than 30 days
 def remove_old_folders(directory, days=30):
     # Calculate the date threshold
     threshold_date = datetime.now() - timedelta(days=days)
@@ -25,20 +24,32 @@ def remove_old_folders(directory, days=30):
                 shutil.rmtree(item_path)
                 print(f"Removed {item_path}")
 
-# cleanup cache
+# Cleanup cache
 directory_to_clean = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/"
 remove_old_folders(directory_to_clean)
 
-# create folder with timestamp
+# Create folder with timestamp (ensure unique timestamp)
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-folder = f"/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/cache/{timestamp}"
-os.makedirs(folder)
-# copy data from cache to folder
-shutil.move("/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache", folder)
+folder_name = timestamp
+folder_path = f"/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/cache/{folder_name}"
 
+# Check if the folder already exists, append milliseconds if necessary
+counter = 0
+while os.path.exists(folder_path):
+    counter += 1
+    folder_name = f"{timestamp}_{counter}"
+    folder_path = f"/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/cache/{folder_name}"
 
-#write the config file
-#paths
+os.makedirs(folder_path)
+print(f"Created folder: {folder_path}")
+
+# Copy data from cache to folder
+source_folder = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache"
+destination_folder = os.path.join(folder_path, "store_cache")
+shutil.copytree(source_folder, destination_folder)
+print(f"Copied {source_folder} to {destination_folder}")
+
+# Define file paths
 dea = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/dea.txt"
 analysis = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/analysis.txt"
 control_genes = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/control_genes.txt"
@@ -50,51 +61,54 @@ group_a = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/
 group_b = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/group_b.txt"
 gsea = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/store_cache/gsea.txt"
 
+
+# Dictionary to store configuration data
+config_data = {}
+
 # Function to parse file content into the desired format
 def parse_content(content):
     try:
-        # Attempt to parse the content as a Python list
+        # Attempt to parse the content as a Python list or dictionary
         parsed_content = ast.literal_eval(content)
-        if isinstance(parsed_content, list):
+        if isinstance(parsed_content, (list, dict)):
             return parsed_content
     except (ValueError, SyntaxError):
         # If parsing fails, treat content as a single string item list
         pass
-    return [content]
+    return content.strip()  # Assuming it's a single line string
 
-
-def add_timestamp(data):
-    data['timestamp'] = timestamp
-
-
-# Read existing data from the YAML file
-config = '/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/Snakemake/config.yaml'
-text_files = [dea, analysis, control_genes, description, email, excluded_genes, graphs, group_a, group_b, gsea]
-
-try:
-    with open(config, 'r') as yaml_file:
-        existing_data = yaml.safe_load(yaml_file)
-except FileNotFoundError:
-    existing_data = {}
-
-# Read content from other text files and update the dictionary
-for file_path in text_files:
+# Read and parse each file
+def read_and_parse_file(file_path):
     with open(file_path, 'r') as file:
-        file_content = file.read().strip()
-        # Use the file name (without extension) as the key
-        key = os.path.splitext(os.path.basename(file_path))[0]
-        existing_data[key] = parse_content(file_content)
+        content = file.read().strip()
+        return parse_content(content)
 
-# Add timestamp to existing data
-add_timestamp(existing_data)
+# Read content from each file
+config_data['dea'] = read_and_parse_file(dea)
+config_data['analysis'] = read_and_parse_file(analysis)
+config_data['control_genes'] = read_and_parse_file(control_genes)
+config_data['description'] = read_and_parse_file(description)
+config_data['email'] = read_and_parse_file(email)
+config_data['excluded_genes'] = read_and_parse_file(excluded_genes)
+config_data['graphs'] = read_and_parse_file(graphs)
+config_data['group_a'] = read_and_parse_file(group_a)
+config_data['group_b'] = read_and_parse_file(group_b)
+config_data['gsea'] = read_and_parse_file(gsea)
+config_data['timestamp'] = timestamp
+# Output YAML file path
+output_yaml = "/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/Snakemake/config.yaml"
 
-# Write the updated data back to the YAML file
-with open(config, 'w') as yaml_file:
-    yaml.dump(existing_data, yaml_file, default_flow_style=False)
-# check dea and run the system command based on the data
+# Write dictionary to YAML file
+with open(output_yaml, 'w') as yaml_file:
+    yaml.dump(config_data, yaml_file, default_flow_style=False)
+
+print(f"Config file '{output_yaml}' successfully created.")
+
+# Check dea and run the system command based on the data
 # Read the contents of the file
 with open(dea, 'r') as file:
     content = file.read().strip()
+    
 
 # Extract the list from the content
 analyses = content.strip('[]').split(', ')
@@ -104,15 +118,11 @@ processes = []
 
 # Iterate through each analysis and run Snakemake sequentially
 for analysis in analyses:
-    command = f"snakemake -s /Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/Snakemake/snakefiles/{analysis}"
+    command = f"snakemake --use-conda -s /Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/Snakemake/snakefiles/{analysis} --cores 1"
     print(f"Running: {analysis}")
     
     # Run the command in a subprocess
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.run(command, shell=True)
     processes.append(process)
-
-# Wait for all subprocesses to complete
-for process in processes:
-    process.wait()
 
 print("All Snakemake commands executed.")

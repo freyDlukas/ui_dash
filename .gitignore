@@ -5,9 +5,20 @@ __pycache__/
 *.xls
 *.xlsx
 *.drawio
+*.txt
+*.json
+*.js
+*.flow
+*.ts
+*.map
+*.scss
+*LICENSE
+*.md
+bootstrap*
 store_cache/*.txt
 store_cache/*.json
 store_cache/*.csv
+/Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/node_modules/
 *.ipynb
 
 Snakemake/
