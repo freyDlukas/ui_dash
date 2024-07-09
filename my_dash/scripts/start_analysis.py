@@ -119,7 +119,6 @@ processes = []
 # Iterate through each analysis and run Snakemake sequentially
 for analysis in analyses:
     command = f"snakemake --use-conda -s /Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/Snakemake/snakefiles/{analysis}/Snakefile --cores 1"
-    #command = "snakemake --use-conda -s /Users/lukas-danielf/Documents/PathologieMarburg/ui_dash/Snakemake/snakefiles/Snakefile --cores 1"
     print(f"Running: {analysis}")
     
     # Run the command in a subprocess

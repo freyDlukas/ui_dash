@@ -298,7 +298,8 @@ def render_layout() -> Component:
                                     {"label": "DESeq2", "value": "deseq2"},
                                     {"label": "Limma", "value": "limma"},
                                     {"label": "EdgeR", "value": "edger"},
-                                    {"label": "Custom GBG", "value": "custom_gbg"}
+                                    {"label": "Custom GBG Gewebe", "value": "custom_gbg_gewebe"},
+                                    {"label": "Custom GBG Zeitraum", "value": "custom_gbg_zeitraum"},
                                 ],
                                 id="check-dea",
                                 value=[],
