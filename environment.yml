@@ -22,6 +22,9 @@ dependencies:
   - loguru
   - pandera
   - scipy
+  - scikit-learn
+  - matplotlib
+  - seaborn
   - pip:
     - snakemake
     - dash-bootstrap-components
